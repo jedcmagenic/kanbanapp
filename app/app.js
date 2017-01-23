@@ -1,15 +1,18 @@
 'use strict'
 
-var React = require('react')
-var ReactDOM = require('react-dom')
+var React = require('react');
+var ReactDOM = require('react-dom');
+var PageHeader = require('./page-header.js');
+var PageBody = require('./page-body.js');
+var PageFooter = require('./page-footer.js');
 
 var KanbanApplication = React.createClass({
-    render: function(){
-        var elapsed = Math.round(this.props.elapsed /100);
-        var seconds = elapsed /10+(elapsed%10? '':'.0');
-        var message = "Hello Jed, React has been successfully running for " + seconds +
-                        "seconds";
-        return <p>{message}</p>;
+    render: function(props){
+        return (
+            <div>
+                <PageHeader text="This is the header" />
+            </div>
+        );
     }
 });
 
@@ -17,7 +20,7 @@ var start = new Date().getTime();
 
 setInterval(function(){
     ReactDOM.render(
-        <KanbanApplication elapsed={new Date().getTime() - start} />,
+        <KanbanApplication />,
         document.getElementById('root')
     );
 }, 50);
