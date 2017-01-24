@@ -7,7 +7,7 @@ var PageFooter = React.createClass({
     render: function(){
         return (
             <div className="col-12 text-center">
-                <img src="../images/LinkedIn_Profile.jpg" alt="magenic_banner" /> 
+                <img src="../images/banner.jpg" alt="magenic_banner" /> 
             </div>
             )
     }
