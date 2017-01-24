@@ -12,7 +12,7 @@ ReactDOM.render(
     <PageMaster>
         <PageHeader text="ReactJS: Kanban App" />
         <PageBanner />
-        <PageBody text="PageBody" />
+        <PageBody text="Welcome to your task board" />
         <PageFooter footerText="Magenic Masters: ReactJS - Jed R. Cayetano" copyrightText=" 2017 Magenic Manila" />
     </PageMaster>,
     document.getElementById('root')
