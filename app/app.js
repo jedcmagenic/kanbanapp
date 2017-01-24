@@ -2,25 +2,18 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var PageHeader = require('./page-header.js');
-var PageBody = require('./page-body.js');
-var PageFooter = require('./page-footer.js');
+var PageMaster = require('./components/page-master.js');
+var PageHeader = require('./components/page-header.js');
+var PageBanner = require('./components/page-banner.js');
+var PageBody = require('./components/page-body.js');
+var PageFooter = require('./components/page-footer.js');
 
-var KanbanApplication = React.createClass({
-    render: function(props){
-        return (
-            <div>
-                <PageHeader text="This is the header" />
-            </div>
-        );
-    }
-});
-
-var start = new Date().getTime();
-
-setInterval(function(){
-    ReactDOM.render(
-        <KanbanApplication />,
-        document.getElementById('root')
-    );
-}, 50);
+ReactDOM.render(
+    <PageMaster>
+        <PageHeader text="ReactJS: Kanban App" />
+        <PageBanner />
+        <PageBody text="PageBody" />
+        <PageFooter footerText="Magenic Masters: ReactJS - Jed R. Cayetano" copyrightText=" 2017 Magenic Manila" />
+    </PageMaster>,
+    document.getElementById('root')
+);

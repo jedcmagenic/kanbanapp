@@ -16,7 +16,8 @@ const config = {
             query: {
                 presets : ["react", "es2015", "stage-0"]
             }
-        }]
+        }
+        ]
     },
     devServer: {
         contentBase: "./public",
