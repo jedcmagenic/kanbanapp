@@ -2,6 +2,8 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import Styles from '../public/css/style.css';
 var PageMaster = require('./components/page-master.js');
 var PageHeader = require('./components/page-header.js');
 var PageBanner = require('./components/page-banner.js');
