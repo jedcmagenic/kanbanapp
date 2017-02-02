@@ -7,12 +7,14 @@ var TaskList = React.createClass({
     propTypes: {
         taskItems: React.PropTypes.array
     },
+    renderItems: function () {
+        return this.props.taskItems.map(function (item) {
+            return (
+                <TaskItem key={item.id} name={item.name} description={item.description} priority={item.priority} status={item.status} />
+            );
+        }, this);
+    },
     render: function(){
-        var tasks = [];
-        this.props.taskItems.forEach(function(task) {
-            tasks.push(<TaskItem name={task.name} description={task.description} priority={task.priority} status={task.status} />)
-        });
-
         return (
             <div className="">
                 <table className="table table-bordered table-responsive table-striped">
@@ -24,7 +26,7 @@ var TaskList = React.createClass({
                         </tr>
                     </thead>
                     <tbody>
-                        {tasks}
+                        {this.renderItems()}
                     </tbody>
                 </table>
             </div>

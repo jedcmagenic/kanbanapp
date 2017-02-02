@@ -9,6 +9,7 @@ var PageMaster = require('./components/page-master.js');
 var Dashboard = require('./components/dashboard.js');
 var Kanban = require('./components/kanban.js');
 var TaskContainer = require('./components/taskcontainer.js');
+var TaskApi = require('./api/tasks-api.js');
 
 ReactDOM.render(
     <Router history={hashHistory}>
