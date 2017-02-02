@@ -11,8 +11,11 @@ var TaskItem = React.createClass({
     render: function(){
         return (
             <tr>
-                <td><div>{this.props.name}</div></td>
-                <td className="text-center">{this.props.priority}</td>
+                <td>
+                    <h4 className="taskName">{this.props.name}</h4>
+                    <h6 className="description">{this.props.description}</h6>
+                </td>
+                <td className="text-center middle">{this.props.priority}</td>
                 <td className="text-center">{this.props.status}</td>
             </tr>
             );
