@@ -5,7 +5,8 @@ var TaskItem = require('./task.js');
 
 var TaskList = React.createClass({
     propTypes: {
-        taskItems: React.PropTypes.array
+        taskItems: React.PropTypes.array,
+        onRefreshButtonClick: React.PropTypes.func.isRequired
     },
     renderItems: function () {
         return this.props.taskItems.map(function (item) {
@@ -29,6 +30,9 @@ var TaskList = React.createClass({
                         {this.renderItems()}
                     </tbody>
                 </table>
+                <a href="#/taskList" className="btn btn-info btn-lg" onClick={this.props.onRefreshButtonClick}>
+                    <span className="glyphicon glyphicon-refresh"></span> Refresh
+                </a>
             </div>
             )
     }

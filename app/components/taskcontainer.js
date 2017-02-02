@@ -5,8 +5,27 @@ var TaskList = require('./tasklist.js');
 var TaskApi = require('../api/tasks-api.js');
 
 var TaskContainer = React.createClass({
+    getInitialState: function () {
+        return {
+            tasksData: JSON.parse(TaskApi.getItems())
+        };
+    },
+    handleRefreshButtonClick: function(){
+        TaskApi.refreshData();
+        this.setState({
+            tasksData: JSON.parse(TaskApi.getItems())
+        });
+    },
+    handleAddButtonClick: function(){
+
+    },
+    handleEditButtonClick: function(){
+
+    },
+    handleDeleteButtonClick: function(){
+
+    },
     render: function(){
-        var tasks =JSON.parse(TaskApi.getItems());
         return (
             <div className="container-fluid">
                 <div className="col-md-12">
@@ -14,7 +33,7 @@ var TaskContainer = React.createClass({
                     <div className="panel panel-primary">
                         <div className="panel-heading">Task Master List </div>
                         <div className="panel-body">
-                            <TaskList taskItems={tasks}/>
+                            <TaskList onRefreshButtonClick={this.handleRefreshButtonClick} taskItems={this.state.tasksData}/>
                         </div>
                     </div>
                 </div>
