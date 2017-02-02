@@ -33,3 +33,7 @@
 .navbar {
     border-radius: 0px !important;
 }
+
+table thead.tasks {
+    background-color: lightblue;
+}
