@@ -24,6 +24,7 @@ var TaskList = React.createClass({
                             <th className="text-center">Task Details</th>
                             <th className="text-center">Priority</th>
                             <th className="text-center">Status</th>
+                            <th className="text-center">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>

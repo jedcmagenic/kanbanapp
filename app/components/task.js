@@ -17,6 +17,10 @@ var TaskItem = React.createClass({
                 </td>
                 <td className="text-center middle">{this.props.priority}</td>
                 <td className="text-center">{this.props.status}</td>
+                <td className="text-center">
+                    <button type="button" className="btn btn-primary glyphicon glyphicon-edit"></button>
+                    <button type="button" className="btn btn-danger glyphicon glyphicon-trash"></button>
+                </td>                
             </tr>
             );
     }
