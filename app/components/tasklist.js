@@ -28,8 +28,7 @@ var TaskList = React.createClass({
                 break;
             }
         }
-        this.state.tasksData.splice( index, 1 );	//Should I be modifying the state's tasksData array directly?
-        this.setState( {tasksData: this.state.tasksData} );
+        this.setState( {tasksData: updatedArray} );
         
     },
     handleTaskDelete: function(taskId){
@@ -52,9 +51,9 @@ var TaskList = React.createClass({
         
     },
     handleSaveChanges: function(){
-        if(confirm("Are you sure you want to save your changes?")){
+        if(confirm("Are you sure you want to save your changes to localStorage?")){
             this.props.onSaveChanges(this.state.tasksData);
-            alert("Local storage updated");
+            alert("localStorage updated");
         }
     },
     renderItems: function () {
