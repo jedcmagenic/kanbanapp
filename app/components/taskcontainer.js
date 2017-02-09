@@ -22,8 +22,20 @@ var TaskContainer = React.createClass({
     handleEditButtonClick: function(){
 
     },
-    handleDeleteButtonClick: function(){
-
+    handleDeleteButtonClick: function(taskId){
+        if(confirm("Are you sure you want to delete this item?")){
+            var index = -1;	
+            var taskListCount = this.state.tasksData.length;
+      		for( var i = 0; i < taskListCount; i++ ) {
+      			if( this.state.tasksData[i].id === taskId ) {
+      				index = i;
+      				break;
+      			}
+      		}
+      		this.state.tasksData.splice( index, 1 );	
+      		this.setState( {tasksData: this.state.tasksData} );
+            alert("Item with task id = " +taskId+" deleted" );
+        }
     },
     render: function(){
         return (
@@ -33,7 +45,10 @@ var TaskContainer = React.createClass({
                     <div className="panel panel-primary">
                         <div className="panel-heading">Task Master List </div>
                         <div className="panel-body">
-                            <TaskList onRefreshButtonClick={this.handleRefreshButtonClick} taskItems={this.state.tasksData}/>
+                            <TaskList 
+                                onRefreshButtonClick={this.handleRefreshButtonClick} 
+                                taskItems={this.state.tasksData}
+                                onTaskDelete={this.handleDeleteButtonClick}/>
                         </div>
                     </div>
                 </div>

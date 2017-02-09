@@ -6,12 +6,27 @@ var TaskItem = require('./task.js');
 var TaskList = React.createClass({
     propTypes: {
         taskItems: React.PropTypes.array,
-        onRefreshButtonClick: React.PropTypes.func.isRequired
+        onRefreshButtonClick: React.PropTypes.func.isRequired,
+        onTaskDelete: React.PropTypes.func.isRequired
+    },
+    handleTaskEdit: function(task){
+        alert(task);
+    },
+    handleTaskDelete: function(taskId){
+        this.props.onTaskDelete(taskId);
     },
     renderItems: function () {
         return this.props.taskItems.map(function (item) {
             return (
-                <TaskItem key={item.id} name={item.name} description={item.description} priority={item.priority} status={item.status} />
+                <TaskItem 
+                    key={item.id} 
+                    id={item.id} 
+                    name={item.name} 
+                    description={item.description} 
+                    priority={item.priority} 
+                    status={item.status} 
+                    onTaskDelete={this.handleTaskDelete}
+                    onTaskEdit={this.handleTaskEdit}/>
             );
         }, this);
     },
