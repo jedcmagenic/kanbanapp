@@ -13,8 +13,11 @@ var TaskList = React.createClass({
     },
     getInitialState: function () {
         return {
-            tasksData: this.props.taskItems
+            tasksData: []
         };
+    },
+    componentDidMount: function(){
+        this.setState({ tasksData: this.props.taskItems });
     },
     generateNewId: function(){
         var maxObj = _.maxBy(this.state.tasksData, function(t){return t.id;});
@@ -24,7 +27,7 @@ var TaskList = React.createClass({
         var newTask = {
             id: this.generateNewId(),
             name: '',
-            desciption: '',
+            description: '',
             priorityId: 1,
             statusId: 1,
             isEditable: true
@@ -43,6 +46,7 @@ var TaskList = React.createClass({
                 updatedArray[i].description = task.description;
                 updatedArray[i].priorityId = task.priorityId;
                 updatedArray[i].statusId = task.statusId;
+                updatedArray[i].isEditable = false;
                 break;
             }
         }
@@ -108,12 +112,12 @@ var TaskList = React.createClass({
                 </table>
                 <div className="btn-toolbar">
                     <a href="#/taskList" className="btn btn-default btn-lg" onClick={this.props.onRefreshButtonClick}>
-                        <span className="glyphicon glyphicon-refresh"></span> Refresh
+                        <span className="glyphicon glyphicon-refresh"></span> Reset localStorage
                     </a>
                     <a href="#/taskList" className="btn btn-primary btn-lg" onClick={this.handleTaskAdd}>
                         <span className="glyphicon glyphicon-plus"></span> Add Task
                     </a>
-                    <a href="#/taskList" className="btn btn-success btn-lg right" onClick={this.handleSaveChanges}>
+                    <a href="#/taskList" className="btn btn-success btn-lg right" title="Save changes to localStorage" onClick={this.handleSaveChanges}>
                         <span className="glyphicon glyphicon-floppy-disk"></span> Save
                     </a>
                 </div>

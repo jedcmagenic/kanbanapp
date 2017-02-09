@@ -14,20 +14,22 @@ var TaskContainer = React.createClass({
         TaskApi.refreshData();
         this.setState({
             tasksData: JSON.parse(TaskApi.getItems())
+        }, function(){
+            this.render();
         });
-        this.render();
     },
-    handleAddTask: function(){
-
-    },
-    handleEditTask: function(){
-
+    handleAddTask: function(taskItems){
+        // this.setState({
+        //     tasksData: taskItems
+        // });
+        // TaskApi.setItems(this.state.tasksData);
     },
     handleUpdateTaskRepo: function(taskItems){
         this.setState({
             tasksData: taskItems
+        }, function(){
+            TaskApi.setItems(this.state.tasksData);
         });
-        TaskApi.setItems(this.state.tasksData);
     },
     render: function(){
         return (
@@ -47,7 +49,7 @@ var TaskContainer = React.createClass({
                 </div>
                 
             </div>
-            )
+        );
     }
 });
 

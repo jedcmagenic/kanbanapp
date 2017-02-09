@@ -6,6 +6,7 @@ var TaskItem = React.createClass({
     propTypes: {
         id: React.PropTypes.number.isRequired,
         name: React.PropTypes.string.isRequired,
+        description: React.PropTypes.string.isRequired,
         priorityId: React.PropTypes.number.isRequired,
         statusId: React.PropTypes.number.isRequired,
         isEditable: React.PropTypes.bool,
@@ -14,13 +15,23 @@ var TaskItem = React.createClass({
     },
     getInitialState: function () {
         return {
+            id: 0,
+            name: '',
+            description: '',
+            priorityId: 1,
+            statusId: 1,
+            isEditable: false
+        };
+    },
+    componentDidMount: function(){
+        this.setState({
             id: this.props.id,
             name: this.props.name,
             description: this.props.description,
             priorityId: this.props.priorityId,
             statusId: this.props.statusId,
             isEditable: this.props.isEditable
-        };
+        });
     },
     handleDeleteTask: function(){
         this.props.onTaskDelete(this.props.id);
@@ -40,7 +51,13 @@ var TaskItem = React.createClass({
         this.props.onTaskEdit(updatedTask)
     },
     handleEditCancelClick: function(){
-        this.setState( this.getInitialState() );
+        this.setState({
+            name: this.props.name,
+            description: this.props.description,
+            priorityId: this.props.priorityId,
+            statusId: this.props.statusId,
+            isEditable: false
+        });
     },
     handlePriorityChange: function(event){
         var selectedPriorityId = parseInt(event.currentTarget.selectedOptions[0].value);
