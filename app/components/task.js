@@ -8,6 +8,7 @@ var TaskItem = React.createClass({
         name: React.PropTypes.string.isRequired,
         priorityId: React.PropTypes.number.isRequired,
         statusId: React.PropTypes.number.isRequired,
+        isEditable: React.PropTypes.bool,
         onTaskEdit: React.PropTypes.func.isRequired,
         onTaskDelete: React.PropTypes.func.isRequired
     },
@@ -18,7 +19,7 @@ var TaskItem = React.createClass({
             description: this.props.description,
             priorityId: this.props.priorityId,
             statusId: this.props.statusId,
-            isEditable: false
+            isEditable: this.props.isEditable
         };
     },
     handleDeleteTask: function(){

@@ -2,6 +2,7 @@
 
 var React = require('react');
 var TaskItem = require('./task.js');
+var _= require('lodash');
 
 var TaskList = React.createClass({
     propTypes: {
@@ -14,6 +15,23 @@ var TaskList = React.createClass({
         return {
             tasksData: this.props.taskItems
         };
+    },
+    generateNewId: function(){
+        var maxObj = _.maxBy(this.state.tasksData, function(t){return t.id;});
+        return maxObj.id + 1;
+    },
+    handleTaskAdd: function(){
+        var newTask = {
+            id: this.generateNewId(),
+            name: '',
+            desciption: '',
+            priorityId: 1,
+            statusId: 1,
+            isEditable: true
+        };
+        var updatedTasks = this.state.tasksData.concat(newTask);
+        this.setState( {tasksData: updatedTasks} );
+        this.props.onTaskAdd(this.state.tasksData);
     },
     handleTaskEdit: function(task){
         var index = -1;	
@@ -65,7 +83,8 @@ var TaskList = React.createClass({
                     name={item.name} 
                     description={item.description} 
                     priorityId={item.priorityId} 
-                    statusId={item.statusId} 
+                    statusId={item.statusId}
+                    isEditable={item.isEditable} 
                     onTaskDelete={this.handleTaskDelete}
                     onTaskEdit={this.handleTaskEdit}/>
             );
@@ -91,7 +110,7 @@ var TaskList = React.createClass({
                     <a href="#/taskList" className="btn btn-default btn-lg" onClick={this.props.onRefreshButtonClick}>
                         <span className="glyphicon glyphicon-refresh"></span> Refresh
                     </a>
-                    <a href="#/taskList" className="btn btn-primary btn-lg" onClick={this.props.onTaskAdd}>
+                    <a href="#/taskList" className="btn btn-primary btn-lg" onClick={this.handleTaskAdd}>
                         <span className="glyphicon glyphicon-plus"></span> Add Task
                     </a>
                     <a href="#/taskList" className="btn btn-success btn-lg right" onClick={this.handleSaveChanges}>
