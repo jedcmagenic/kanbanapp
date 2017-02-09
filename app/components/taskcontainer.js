@@ -15,27 +15,19 @@ var TaskContainer = React.createClass({
         this.setState({
             tasksData: JSON.parse(TaskApi.getItems())
         });
+        this.render();
     },
-    handleAddButtonClick: function(){
+    handleAddTask: function(){
 
     },
-    handleEditButtonClick: function(){
+    handleEditTask: function(){
 
     },
-    handleDeleteButtonClick: function(taskId){
-        if(confirm("Are you sure you want to delete this item?")){
-            var index = -1;	
-            var taskListCount = this.state.tasksData.length;
-      		for( var i = 0; i < taskListCount; i++ ) {
-      			if( this.state.tasksData[i].id === taskId ) {
-      				index = i;
-      				break;
-      			}
-      		}
-      		this.state.tasksData.splice( index, 1 );	
-      		this.setState( {tasksData: this.state.tasksData} );
-            alert("Item with task id = " +taskId+" deleted" );
-        }
+    handleUpdateTaskRepo: function(taskItems){
+        this.setState({
+            tasksData: taskItems
+        });
+        TaskApi.setItems(this.state.tasksData);
     },
     render: function(){
         return (
@@ -46,9 +38,10 @@ var TaskContainer = React.createClass({
                         <div className="panel-heading">Task Master List </div>
                         <div className="panel-body">
                             <TaskList 
+                                taskItems={this.state.tasksData}                                
                                 onRefreshButtonClick={this.handleRefreshButtonClick} 
-                                taskItems={this.state.tasksData}
-                                onTaskDelete={this.handleDeleteButtonClick}/>
+                                onSaveChanges={this.handleUpdateTaskRepo}
+                                onTaskAdd={this.handleAddTask}/>
                         </div>
                     </div>
                 </div>
