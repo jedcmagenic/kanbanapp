@@ -20,7 +20,7 @@ var Paginator = React.createClass({
     },
     componentWillMount: function(){
         this.setState({
-            totalPages: (this.props.totalListItemCount + this.props.itemsPerPage - 1)/this.props.itemsPerPage
+            totalPages: (this.props.totalListItemCount/this.props.itemsPerPage) + ((this.props.totalListItemCount % this.props.itemsPerPage) ? 1 : 0)
         });
         this.showPageItems();
     },
@@ -79,14 +79,16 @@ var Paginator = React.createClass({
     },
     render: function(){
         return(
-            <div>
-                <div className="col-md-6 center">
-                    <h5 className="col-md-12 text-right text-middle">Items {(this.props.itemsPerPage * this.state.selectedPageNumber) - (this.props.itemsPerPage - 1)} - x of {this.props.totalListItemCount}</h5>
-                </div>
-                <div className="col-md-6 btn-group right">
-                    <button className="btn btn-default" onClick={this.handlePreviousClick}><i className="glyphicon glyphicon-chevron-left"></i> Prev</button>
-                    {this.renderPageButtons()}
-                    <button className="btn btn-default" onClick={this.handleNextClick}>Next <i className="glyphicon glyphicon-chevron-right"></i></button>
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="btn-group pull-right">
+                        <button className="btn btn-default" onClick={this.handlePreviousClick}><i className="glyphicon glyphicon-chevron-left"></i> Prev</button>
+                        {this.renderPageButtons()}
+                        <button className="btn btn-default" onClick={this.handleNextClick}>Next <i className="glyphicon glyphicon-chevron-right"></i></button>
+                    </div>
+                    <h5 className="spacer pull-right text-right text-middle">
+                        Items {(this.props.itemsPerPage * this.state.selectedPageNumber) - (this.props.itemsPerPage - 1)} - x of {this.props.totalListItemCount}
+                    </h5>
                 </div>
             </div>
         )

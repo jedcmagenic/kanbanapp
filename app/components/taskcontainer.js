@@ -10,6 +10,8 @@ var TaskContainer = React.createClass({
             tasksData: JSON.parse(TaskApi.getItems())
         };
     },
+    componentWillUpdate: function(){
+    },
     handleRefreshButtonClick: function(){
         TaskApi.refreshData();
         this.setState({
