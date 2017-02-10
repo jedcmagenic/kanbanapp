@@ -45,3 +45,7 @@
 .table > tbody > tr > td h6.description {
      text-indent: 30px;
 }
+
+.sortable{
+    cursor: pointer;
+}

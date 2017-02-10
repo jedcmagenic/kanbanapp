@@ -13,7 +13,12 @@ var TaskList = React.createClass({
     },
     getInitialState: function () {
         return {
-            tasksData: []
+            tasksData: [],
+            sortOrder: {
+                name: '',
+                priorityId: '',
+                statusId: ''
+            }
         };
     },
     componentDidMount: function(){
@@ -94,15 +99,39 @@ var TaskList = React.createClass({
             );
         }, this);
     },
+    sortColumn: function(event){
+        var columnType = event.currentTarget.dataset.columntype;
+        var sortOrderObj = this.state.sortOrder;
+        var sortOrder = !sortOrderObj[columnType] || sortOrderObj[columnType] == 'desc'? 'asc': 'desc'; 
+        var sortedTasks = _.orderBy(this.state.tasksData, [columnType], [sortOrder]);
+        sortOrderObj[columnType] = sortOrder;
+        this.setState({
+            tasksData: sortedTasks,
+            sortOrder: sortOrderObj
+        });
+    },
+    getSortIcon: function(column){
+        var sortIconClass = '';
+        switch(this.state.sortOrder[column])
+        {
+            case 'asc':
+                sortIconClass = 'glyphicon glyphicon-triangle-bottom';
+                break;
+            case 'desc':
+                sortIconClass = 'glyphicon glyphicon-triangle-top';
+                break;
+        }
+        return sortIconClass;
+    },
     render: function(){
         return (
             <div className="">
                 <table className="table table-bordered table-responsive table-striped">
                     <thead className="tasks">
                         <tr>
-                            <th className="text-center">Task Details</th>
-                            <th className="text-center">Priority</th>
-                            <th className="text-center">Status</th>
+                            <th className="text-center sortable" data-columnType="name" onClick={this.sortColumn}>Task Details<i className={this.getSortIcon('name')}></i></th>
+                            <th className="text-center sortable" data-columnType="priorityId" onClick={this.sortColumn}>Priority<i className={this.getSortIcon('priorityId')}></i></th>
+                            <th className="text-center sortable" data-columnType="statusId" onClick={this.sortColumn}>Status<i className={this.getSortIcon('statusId')}></i></th>
                             <th className="text-center">&nbsp;</th>
                         </tr>
                     </thead>
