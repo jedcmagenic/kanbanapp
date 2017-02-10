@@ -17,9 +17,6 @@ var SortableHeader = React.createClass({
             sortIconClassName: '',
         };
     },
-    componentDidMount: function(){
-        //TODO
-    },
     handleSort: function(){
         var sortIconClass = '';
         var newSortOrder = ''
