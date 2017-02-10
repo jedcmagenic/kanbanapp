@@ -2,6 +2,7 @@
 
 var React = require('react');
 var TaskItem = require('./task.js');
+var SortableHeader = require('./sortableHeader.js');
 var _= require('lodash');
 
 var TaskList = React.createClass({
@@ -13,12 +14,7 @@ var TaskList = React.createClass({
     },
     getInitialState: function () {
         return {
-            tasksData: [],
-            sortOrder: {
-                name: '',
-                priorityId: '',
-                statusId: ''
-            }
+            tasksData: []
         };
     },
     componentDidMount: function(){
@@ -99,29 +95,11 @@ var TaskList = React.createClass({
             );
         }, this);
     },
-    sortColumn: function(event){
-        var columnType = event.currentTarget.dataset.columntype;
-        var sortOrderObj = this.state.sortOrder;
-        var sortOrder = !sortOrderObj[columnType] || sortOrderObj[columnType] == 'desc'? 'asc': 'desc'; 
+    sortColumn: function(sortOrder, columnType){
         var sortedTasks = _.orderBy(this.state.tasksData, [columnType], [sortOrder]);
-        sortOrderObj[columnType] = sortOrder;
         this.setState({
-            tasksData: sortedTasks,
-            sortOrder: sortOrderObj
+            tasksData: sortedTasks
         });
-    },
-    getSortIcon: function(column){
-        var sortIconClass = '';
-        switch(this.state.sortOrder[column])
-        {
-            case 'asc':
-                sortIconClass = 'glyphicon glyphicon-triangle-bottom';
-                break;
-            case 'desc':
-                sortIconClass = 'glyphicon glyphicon-triangle-top';
-                break;
-        }
-        return sortIconClass;
     },
     render: function(){
         return (
@@ -129,9 +107,27 @@ var TaskList = React.createClass({
                 <table className="table table-bordered table-responsive table-striped">
                     <thead className="tasks">
                         <tr>
-                            <th className="text-center sortable" data-columnType="name" onClick={this.sortColumn}>Task Details<i className={this.getSortIcon('name')}></i></th>
-                            <th className="text-center sortable" data-columnType="priorityId" onClick={this.sortColumn}>Priority<i className={this.getSortIcon('priorityId')}></i></th>
-                            <th className="text-center sortable" data-columnType="statusId" onClick={this.sortColumn}>Status<i className={this.getSortIcon('statusId')}></i></th>
+                            <SortableHeader 
+                                title="Task Details" 
+                                headerClassName="text-center sortable" 
+                                sortIconAscClassName="glyphicon glyphicon-triangle-top"
+                                sortIconDescClassName="glyphicon glyphicon-triangle-bottom"
+                                dataColumType="name"
+                                onSort={this.sortColumn} />
+                            <SortableHeader 
+                                title="Priority" 
+                                headerClassName="text-center sortable" 
+                                sortIconAscClassName="glyphicon glyphicon-triangle-top"
+                                sortIconDescClassName="glyphicon glyphicon-triangle-bottom"
+                                dataColumType="priorityId"
+                                onSort={this.sortColumn} />
+                            <SortableHeader 
+                                title="Status" 
+                                headerClassName="text-center sortable" 
+                                sortIconAscClassName="glyphicon glyphicon-triangle-top"
+                                sortIconDescClassName="glyphicon glyphicon-triangle-bottom"
+                                dataColumType="statusId"
+                                onSort={this.sortColumn} />
                             <th className="text-center">&nbsp;</th>
                         </tr>
                     </thead>
