@@ -49,3 +49,8 @@
 .sortable{
     cursor: pointer;
 }
+
+div.right{
+    float: right !important;
+    text-align: right;
+}

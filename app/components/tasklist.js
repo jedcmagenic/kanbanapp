@@ -3,6 +3,7 @@
 var React = require('react');
 var TaskItem = require('./task.js');
 var SortableHeader = require('./sortableHeader.js');
+var Paginator = require('./paginator.js');
 var _= require('lodash');
 
 var TaskList = React.createClass({
@@ -17,7 +18,7 @@ var TaskList = React.createClass({
             tasksData: []
         };
     },
-    componentDidMount: function(){
+    componentWillMount: function(){
         this.setState({ tasksData: this.props.taskItems });
     },
     generateNewId: function(){
@@ -101,9 +102,15 @@ var TaskList = React.createClass({
             tasksData: sortedTasks
         });
     },
+    handlePageChange: function(paginatedTasks){
+        this.setState({
+            tasksData: paginatedTasks
+        });
+    },
     render: function(){
         return (
-            <div className="">
+            <div className="col-md-12">
+                <div className="col-md-12">
                 <table className="table table-bordered table-responsive table-striped">
                     <thead className="tasks">
                         <tr>
@@ -135,7 +142,9 @@ var TaskList = React.createClass({
                         {this.renderItems()}
                     </tbody>
                 </table>
-                <div className="btn-toolbar">
+                </div>
+                
+                <div className="col-md-6 btn-toolbar">
                     <a href="#/taskList" className="btn btn-default btn-lg" onClick={this.props.onRefreshButtonClick}>
                         <span className="glyphicon glyphicon-refresh"></span> Reset localStorage
                     </a>
@@ -145,6 +154,9 @@ var TaskList = React.createClass({
                     <a href="#/taskList" className="btn btn-success btn-lg right" title="Save changes to localStorage" onClick={this.handleSaveChanges}>
                         <span className="glyphicon glyphicon-floppy-disk"></span> Save
                     </a>
+                </div>
+                <div className="col-md-6">
+                    <Paginator listItems={this.props.taskItems} itemsPerPage={5} totalListItemCount={this.state.tasksData.length} onPageChange={this.handlePageChange}/>
                 </div>
             </div>
             )
