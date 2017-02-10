@@ -156,7 +156,7 @@ var TaskList = React.createClass({
                     </a>
                 </div>
                 <div className="col-md-6">
-                    <Paginator listItems={this.props.taskItems} itemsPerPage={5} totalListItemCount={this.state.tasksData.length} onPageChange={this.handlePageChange}/>
+                    <Paginator listItems={this.props.taskItems} itemsPerPage={5} totalListItemCount={this.props.taskItems.length} onPageChange={this.handlePageChange}/>
                 </div>
             </div>
             )

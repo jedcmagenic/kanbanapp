@@ -54,3 +54,8 @@ div.right{
     float: right !important;
     text-align: right;
 }
+
+div.text-middle{
+    display: inline-block;
+    vertical-align: middle;
+}

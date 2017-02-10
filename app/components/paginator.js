@@ -14,8 +14,8 @@ var Paginator = React.createClass({
         return {
             selectedPageNumber: 1,
             totalPages: 1,
-            isPreviousButtonActive: false,
-            isNextButtonActive: false
+            fromItem: 0,
+            toItem: 0
         };
     },
     componentWillMount: function(){
@@ -79,10 +79,15 @@ var Paginator = React.createClass({
     },
     render: function(){
         return(
-            <div className="btn-group right">
-                <button className="btn btn-default" onClick={this.handlePreviousClick}><i className="glyphicon glyphicon-chevron-left"></i> Prev</button>
-                {this.renderPageButtons()}
-                <button className="btn btn-default" onClick={this.handleNextClick}>Next <i className="glyphicon glyphicon-chevron-right"></i></button>
+            <div>
+                <div className="col-md-6 center">
+                    <h5 className="col-md-12 text-right text-middle">Items {(this.props.itemsPerPage * this.state.selectedPageNumber) - (this.props.itemsPerPage - 1)} - x of {this.props.totalListItemCount}</h5>
+                </div>
+                <div className="col-md-6 btn-group right">
+                    <button className="btn btn-default" onClick={this.handlePreviousClick}><i className="glyphicon glyphicon-chevron-left"></i> Prev</button>
+                    {this.renderPageButtons()}
+                    <button className="btn btn-default" onClick={this.handleNextClick}>Next <i className="glyphicon glyphicon-chevron-right"></i></button>
+                </div>
             </div>
         )
     }
